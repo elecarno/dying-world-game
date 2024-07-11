@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 # main
 var speed: float
-const WALK_SPEED: float = 4.0
-const SPRINT_SPEED: float = 8.0
-const CROUCH_SPEED: float = 1.5
-const JUMP_VELOCITY: float = 6.0
+const WALK_SPEED: float = 6.0
+const SPRINT_SPEED: float = 12.0
+const CROUCH_SPEED: float = 0.5
+const JUMP_VELOCITY: float = 10.0
 const SENSITIVITY: float = 0.0025
 var grounded: bool = false
 var crouched: bool = false

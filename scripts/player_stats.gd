@@ -1,16 +1,16 @@
 extends Node3D
 
-var hp: float = 50.0
-var MAX_HP: int = 50
+var hp: float = 100.0
+var MAX_HP: int = 100.0
 
-var stamina: float = 50.0
-var MAX_STAMINA: int = 50
-var STAMINA_REGEN: float = 10.0
+var stamina: float = 100.0
+var MAX_STAMINA: int = 100.0
+var STAMINA_REGEN: float = 20.0
 var STAMINA_DRAIN: float = 15.0
 var can_sprint: bool = true
 
-var mana: float = 50.0
-var MAX_MANA: int = 50
+var mana: float = 75.0
+var MAX_MANA: int = 75.0
 
 func _process(delta):
 	if Input.is_action_pressed("mov_sprint") and can_sprint:
