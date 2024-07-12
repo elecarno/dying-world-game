@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 # main
 var speed: float
-const WALK_SPEED: float = 6.0
-const SPRINT_SPEED: float = 12.0
+const WALK_SPEED: float = 15.0 # def 6
+const SPRINT_SPEED: float = 30.0 # def 12
 const CROUCH_SPEED: float = 0.5
-const JUMP_VELOCITY: float = 10.0
+const JUMP_VELOCITY: float = 20.0 # def 10
 const SENSITIVITY: float = 0.0025
 var grounded: bool = false
 var crouched: bool = false
@@ -16,8 +16,8 @@ const BOB_AMP: float = 0.08
 var t_bob: float = 0.0
 
 # fov
-const BASE_FOV: float = 70.0
-const FOV_CHANGE: float = 1.5
+const BASE_FOV: float = 75.0
+const FOV_CHANGE: float = 1.2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

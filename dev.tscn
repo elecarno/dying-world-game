@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://dtotj42xmc77w"]
+[gd_scene load_steps=38 format=3 uid="uid://dtotj42xmc77w"]
 
 [ext_resource type="Material" uid="uid://dwl2yxa1jrbeb" path="res://sky.tres" id="1_0chrf"]
+[ext_resource type="Script" path="res://scripts/day_cycle.gd" id="1_1dg4y"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_xxbqv"]
 [ext_resource type="Script" path="res://scripts/player_sfx.gd" id="2_ae80s"]
 [ext_resource type="AudioStream" uid="uid://cnj7p3mys5vr4" path="res://sound/footsteps/Footsteps_Leaves_Walk_01.wav" id="2_u8wpp"]
@@ -27,15 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://cdcf8vxqjasss" path="res://env/prefabs/temple_1.tscn" id="24_a5nj0"]
 [ext_resource type="Script" path="res://scripts/player_hud.gd" id="28_e4ey4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgima"]
-albedo_color = Color(0.552941, 0.552941, 0.552941, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipxnk"]
-albedo_color = Color(0.188235, 0.572549, 0.733333, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja7k8"]
-albedo_color = Color(0.815686, 0.305882, 0.380392, 1)
-
 [sub_resource type="Sky" id="Sky_j185m"]
 sky_material = ExtResource("1_0chrf")
 
@@ -51,7 +43,6 @@ ssil_enabled = true
 ssil_intensity = 1.5
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.629228, 0.661326, 0.711761, 1)
 fog_density = 0.0002
 fog_aerial_perspective = 0.591
 volumetric_fog_density = 0.0075
@@ -86,73 +77,24 @@ width = 1
 
 [node name="map" type="Node3D"]
 
-[node name="dev_map" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_bgima")
-use_collision = true
-size = Vector3(32, 0.001, 32)
+[node name="day_cycle" type="Node3D" parent="."]
+script = ExtResource("1_1dg4y")
 
-[node name="wall" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 1.9995, 0)
-material_override = SubResource("StandardMaterial3D_bgima")
-use_collision = true
-size = Vector3(1, 4, 32)
+[node name="env" type="WorldEnvironment" parent="day_cycle"]
+environment = SubResource("Environment_lc2bm")
 
-[node name="wall2" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 1.9995, 0)
-material_override = SubResource("StandardMaterial3D_bgima")
-use_collision = true
-size = Vector3(1, 4, 32)
-
-[node name="wall3" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.77527e-07, 1.9995, 15.5)
-material_override = SubResource("StandardMaterial3D_bgima")
-use_collision = true
-size = Vector3(1, 4, 32)
-
-[node name="wall4" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.77527e-07, 1.9995, -15.5)
-material_override = SubResource("StandardMaterial3D_bgima")
-use_collision = true
-size = Vector3(1, 4, 32)
-
-[node name="box" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.6595, 0.5, 8.6595)
-material_override = SubResource("StandardMaterial3D_ipxnk")
-use_collision = true
-
-[node name="box2" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.6595, 1, 8.6595)
-material_override = SubResource("StandardMaterial3D_ja7k8")
-use_collision = true
-size = Vector3(2, 2, 2)
-
-[node name="box3" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6595, 0.5, 5.6595)
-material_override = SubResource("StandardMaterial3D_ipxnk")
-use_collision = true
-
-[node name="box4" type="CSGBox3D" parent="dev_map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.21695, 1, 5.6595)
-material_override = SubResource("StandardMaterial3D_ja7k8")
-use_collision = true
-size = Vector3(2, 2, 2)
-
-[node name="moon" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.937081, 0.0260697, -0.348137, 0.11341, 0.920392, 0.374189, 0.330178, -0.390128, 0.859525, 0, 2884.03, -64.7931)
+[node name="sun" type="DirectionalLight3D" parent="day_cycle"]
+transform = Transform3D(-3.25619e-08, 0.667144, -0.744929, 2.91618e-08, 0.744929, 0.667144, 1, 1.77636e-15, -4.37114e-08, 0, 1442.74, 0)
 shadow_enabled = true
 sky_mode = 2
 
-[node name="sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.425779, -0.107135, -0.898462, 0, 0.992966, -0.118404, 0.904827, 0.050414, 0.422784, 0, 1442.74, 0)
+[node name="moon" type="DirectionalLight3D" parent="day_cycle"]
+transform = Transform3D(0.937081, 0.0260703, -0.348137, 0.11341, 0.920392, 0.374189, 0.330178, -0.390128, 0.859525, 0, 2884.03, -64.7931)
 shadow_enabled = true
-
-[node name="env" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_lc2bm")
+sky_mode = 2
 
 [node name="player" type="CharacterBody3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6041.53, 1318.02, 3208.91)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6198.62, 312.922, 4702.8)
 script = ExtResource("1_xxbqv")
 
 [node name="mesh" type="MeshInstance3D" parent="player"]

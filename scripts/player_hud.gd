@@ -12,7 +12,7 @@ func _update_hud():
 	stamina_bar.max_value = player_stats.MAX_STAMINA
 	mana_bar.max_value = player_stats.MAX_MANA
 
-func _process(delta):
+func _process(_delta):
 	hp_bar.value = player_stats.hp
 	stamina_bar.value = player_stats.stamina
 	mana_bar.value = player_stats.mana
