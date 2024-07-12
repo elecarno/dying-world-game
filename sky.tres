@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dwl2yxa1jrbeb"]
+
+[ext_resource type="Shader" path="res://sky.gdshader" id="1_ih7dq"]
+[ext_resource type="Texture2D" uid="uid://db4fbrnnxnmwi" path="res://env/tex/stars.png" id="2_8wsgf"]
+
+[resource]
+shader = ExtResource("1_ih7dq")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.345098, 0.494118, 0.690196, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0, 0.026, 0.12, 1)
+shader_parameter/night_bottom_color = Color(0, 0.0566667, 0.2, 1)
+shader_parameter/horizon_color = Color(6.73831e-07, 0.302736, 0.350118, 1)
+shader_parameter/horizon_blur = 0.1
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.119
+shader_parameter/sun_blur = 4.304
+shader_parameter/moon_color = Color(0.7, 1, 0.97, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.3
+shader_parameter/clouds_scale = 3.71
+shader_parameter/clouds_cutoff = 0.55
+shader_parameter/clouds_fuzziness = 0.0
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/stars_texture = ExtResource("2_8wsgf")
+shader_parameter/overwritten_time = 0.0

@@ -1,5 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://dtotj42xmc77w"]
+[gd_scene load_steps=40 format=3 uid="uid://dtotj42xmc77w"]
 
+[ext_resource type="Material" uid="uid://dwl2yxa1jrbeb" path="res://sky.tres" id="1_0chrf"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_xxbqv"]
 [ext_resource type="Script" path="res://scripts/player_sfx.gd" id="2_ae80s"]
 [ext_resource type="AudioStream" uid="uid://cnj7p3mys5vr4" path="res://sound/footsteps/Footsteps_Leaves_Walk_01.wav" id="2_u8wpp"]
@@ -21,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://bgc54gfr8do7c" path="res://sound/footsteps/Footsteps_Leaves_Run_05.wav" id="13_dy0s1"]
 [ext_resource type="AudioStream" uid="uid://cx3n17tpia1cp" path="res://sound/footsteps/Footsteps_Leaves_Run_06.wav" id="14_hs6wd"]
 [ext_resource type="AudioStream" uid="uid://bdc2gmb8foh3g" path="res://sound/ambience/Ambiance_Night_Loop_Stereo.wav" id="14_kd2dl"]
+[ext_resource type="PackedScene" uid="uid://nxw1cppink00" path="res://env/prefabs/water_plane.tscn" id="22_5ai8v"]
 [ext_resource type="PackedScene" uid="uid://d1cpfkd18veq8" path="res://env/map_main.tscn" id="22_pcqb1"]
 [ext_resource type="PackedScene" uid="uid://cdcf8vxqjasss" path="res://env/prefabs/temple_1.tscn" id="24_a5nj0"]
 [ext_resource type="Script" path="res://scripts/player_hud.gd" id="28_e4ey4"]
@@ -34,25 +36,26 @@ albedo_color = Color(0.188235, 0.572549, 0.733333, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja7k8"]
 albedo_color = Color(0.815686, 0.305882, 0.380392, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkms"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
 [sub_resource type="Sky" id="Sky_j185m"]
-sky_material = SubResource("ProceduralSkyMaterial_7rkms")
+sky_material = ExtResource("1_0chrf")
 
 [sub_resource type="Environment" id="Environment_lc2bm"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.714761, 0.819219, 0.880671, 1)
 sky = SubResource("Sky_j185m")
-ambient_light_source = 2
-ambient_light_color = Color(0.34, 0.34, 0.34, 1)
-tonemap_mode = 2
+ambient_light_source = 3
+reflected_light_source = 1
+tonemap_mode = 3
+ssao_enabled = true
 ssil_enabled = true
 ssil_intensity = 1.5
 glow_enabled = true
-fog_light_color = Color(0.0392157, 0.0117647, 0.0117647, 1)
-volumetric_fog_albedo = Color(0.439216, 0.113725, 0.211765, 1)
+fog_enabled = true
+fog_light_color = Color(0.629228, 0.661326, 0.711761, 1)
+fog_density = 0.0002
+fog_aerial_perspective = 0.591
+volumetric_fog_density = 0.0075
+volumetric_fog_albedo = Color(0.907942, 0.907942, 0.907942, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vxm8p"]
 height = 1.8
@@ -136,16 +139,20 @@ material_override = SubResource("StandardMaterial3D_ja7k8")
 use_collision = true
 size = Vector3(2, 2, 2)
 
+[node name="moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.937081, 0.0260697, -0.348137, 0.11341, 0.920392, 0.374189, 0.330178, -0.390128, 0.859525, 0, 2884.03, -64.7931)
+shadow_enabled = true
+sky_mode = 2
+
 [node name="sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.475282, 0.793517, -0.380048, -0.176038, 0.508986, 0.842581, 0.862042, -0.333561, 0.381601, 0, 4, 0)
-light_color = Color(0.835494, 0.926027, 0.921147, 1)
+transform = Transform3D(0.425779, -0.107135, -0.898462, 0, 0.992966, -0.118404, 0.904827, 0.050414, 0.422784, 0, 1442.74, 0)
 shadow_enabled = true
 
 [node name="env" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lc2bm")
 
 [node name="player" type="CharacterBody3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5906.23, 1217.07, 3735.67)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6041.53, 1318.02, 3208.91)
 script = ExtResource("1_xxbqv")
 
 [node name="mesh" type="MeshInstance3D" parent="player"]
@@ -234,6 +241,9 @@ mesh = SubResource("PlaneMesh_txu83")
 
 [node name="col" type="CollisionShape3D" parent="ground/static"]
 shape = SubResource("ConcavePolygonShape3D_lr83v")
+
+[node name="water_plane" parent="." instance=ExtResource("22_5ai8v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.8489, 0)
 
 [node name="map_main" parent="." instance=ExtResource("22_pcqb1")]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)

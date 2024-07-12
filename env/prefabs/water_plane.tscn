@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://nxw1cppink00"]
+
+[ext_resource type="Material" uid="uid://btqr6tgwjxj2j" path="res://env/prefabs/water.tres" id="1_susse"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_w7f4d"]
+size = Vector2(25000, 25000)
+subdivide_width = 2500
+subdivide_depth = 2500
+orientation = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_smghf"]
+size = Vector2(25000, 25000)
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_envcq"]
+albedo_color = Color(0.00566115, 0.00566115, 0.00566115, 1)
+
+[node name="water_plane" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_w7f4d")
+surface_material_override/0 = ExtResource("1_susse")
+
+[node name="sea_floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -308.381, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_smghf")
+surface_material_override/0 = SubResource("StandardMaterial3D_envcq")
