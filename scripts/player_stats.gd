@@ -3,7 +3,7 @@ extends Node3D
 var hp: float = 100.0
 var MAX_HP: int = 100
 
-var stamina: float = 100.0
+var stamina: float = 10000.0 # def 100.0
 var MAX_STAMINA: int = 100
 var STAMINA_REGEN: float = 20.0
 var STAMINA_DRAIN: float = 15.0

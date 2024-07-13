@@ -24,6 +24,6 @@ func _process(delta):
 	if time >= full_day_seconds:
 		time = 0
 		
-	sun.rotation_degrees.x = -(time / full_day_seconds) * 360
+	sun.rotation_degrees.x = -(time / full_day_seconds) * 360 # + 90 for night, - 90 for noon
 	env.environment.set_fog_light_color(get_fog_color(time))
 
