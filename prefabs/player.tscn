@@ -1,0 +1,110 @@
+[gd_scene load_steps=23 format=3 uid="uid://k6sv2dlrlx17"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_23n32"]
+[ext_resource type="Script" path="res://scripts/player_sfx.gd" id="2_62obb"]
+[ext_resource type="AudioStream" uid="uid://cnj7p3mys5vr4" path="res://sound/footsteps/Footsteps_Leaves_Walk_01.wav" id="3_scbe7"]
+[ext_resource type="AudioStream" uid="uid://tpebc2yu8rsb" path="res://sound/footsteps/Footsteps_Leaves_Walk_02.wav" id="4_j76bl"]
+[ext_resource type="AudioStream" uid="uid://wyimqwi6l6na" path="res://sound/footsteps/Footsteps_Leaves_Walk_03.wav" id="5_yr17p"]
+[ext_resource type="AudioStream" uid="uid://c4bllywk436es" path="res://sound/footsteps/Footsteps_Leaves_Walk_04.wav" id="6_ipify"]
+[ext_resource type="AudioStream" uid="uid://cwj500ktbypon" path="res://sound/footsteps/Footsteps_Leaves_Walk_05.wav" id="7_7dab4"]
+[ext_resource type="AudioStream" uid="uid://dnobrac0eqpc2" path="res://sound/footsteps/Footsteps_Leaves_Walk_06.wav" id="8_eiaho"]
+[ext_resource type="AudioStream" uid="uid://dlonvt10hk5om" path="res://sound/footsteps/Footsteps_Leaves_Run_01.wav" id="9_ik45b"]
+[ext_resource type="AudioStream" uid="uid://dolpdp6yhcx7q" path="res://sound/footsteps/Footsteps_Leaves_Run_02.wav" id="10_7on61"]
+[ext_resource type="AudioStream" uid="uid://gdof47ut7o36" path="res://sound/footsteps/Footsteps_Leaves_Run_03.wav" id="11_cp6b0"]
+[ext_resource type="AudioStream" uid="uid://rcyhd13udm2q" path="res://sound/footsteps/Footsteps_Leaves_Run_04.wav" id="12_2kkar"]
+[ext_resource type="AudioStream" uid="uid://bgc54gfr8do7c" path="res://sound/footsteps/Footsteps_Leaves_Run_05.wav" id="13_27773"]
+[ext_resource type="AudioStream" uid="uid://cx3n17tpia1cp" path="res://sound/footsteps/Footsteps_Leaves_Run_06.wav" id="14_dmv6y"]
+[ext_resource type="AudioStream" uid="uid://2aeycev8w0cv" path="res://sound/jumping/Footsteps_Leaves_Jump_Start_01.wav" id="15_eoj6y"]
+[ext_resource type="AudioStream" uid="uid://b3lghvx5a64uh" path="res://sound/jumping/Footsteps_Leaves_Jump_Start_02.wav" id="16_8npmm"]
+[ext_resource type="AudioStream" uid="uid://dsakb5618fna" path="res://sound/jumping/Footsteps_Leaves_Jump_Land_01.wav" id="17_mfxhx"]
+[ext_resource type="AudioStream" uid="uid://ba4rbsjlg3d0x" path="res://sound/jumping/Footsteps_Leaves_Jump_Land_02.wav" id="18_cfusf"]
+[ext_resource type="AudioStream" uid="uid://t5yetklg5nit" path="res://sound/ambience/Ambiance_Wind_Forest_Loop_Stereo.wav" id="19_od52q"]
+[ext_resource type="Script" path="res://scripts/audio_loop.gd" id="20_5otre"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vxm8p"]
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ushxy"]
+height = 1.8
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_23n32")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_vxm8p")
+
+[node name="col" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_ushxy")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="cam" type="Camera3D" parent="head"]
+current = true
+far = 40000.0
+
+[node name="interaction" type="RayCast3D" parent="head/cam"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+target_position = Vector3(0, 0, 5)
+
+[node name="sfx" type="Node3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.70001, 0)
+script = ExtResource("2_62obb")
+footsteps_forest_1 = [ExtResource("3_scbe7"), ExtResource("4_j76bl"), ExtResource("5_yr17p")]
+footsteps_forest_2 = [ExtResource("6_ipify"), ExtResource("7_7dab4"), ExtResource("8_eiaho")]
+footsteps_sprint_forest_1 = [ExtResource("9_ik45b"), ExtResource("10_7on61"), ExtResource("11_cp6b0")]
+footsteps_sprint_forest_2 = [ExtResource("12_2kkar"), ExtResource("13_27773"), ExtResource("14_dmv6y")]
+jump_forest = [ExtResource("15_eoj6y"), ExtResource("16_8npmm")]
+land_forest = [ExtResource("17_mfxhx"), ExtResource("18_cfusf")]
+
+[node name="footstep_1" type="AudioStreamPlayer3D" parent="head/sfx"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+stream = ExtResource("3_scbe7")
+volume_db = -12.0
+max_db = 1.0
+max_polyphony = 4
+panning_strength = 0.1
+
+[node name="footstep_2" type="AudioStreamPlayer3D" parent="head/sfx"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+stream = ExtResource("3_scbe7")
+volume_db = -12.0
+max_db = 1.0
+max_polyphony = 4
+panning_strength = 0.1
+
+[node name="jump" type="AudioStreamPlayer3D" parent="head/sfx"]
+stream = ExtResource("15_eoj6y")
+volume_db = 12.0
+max_db = 1.0
+max_polyphony = 4
+panning_strength = 0.1
+
+[node name="land" type="AudioStreamPlayer3D" parent="head/sfx"]
+stream = ExtResource("17_mfxhx")
+volume_db = 12.0
+max_db = 1.0
+max_polyphony = 4
+panning_strength = 0.1
+
+[node name="coyote_time" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="sprint_cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="amb_forest" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("19_od52q")
+attenuation_model = 3
+volume_db = -8.0
+unit_size = 100.0
+panning_strength = 0.0
+script = ExtResource("20_5otre")
+looping = false
+
+[connection signal="timeout" from="coyote_time" to="." method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="sprint_cooldown" to="." method="_on_sprint_cooldown_timeout"]
+[connection signal="finished" from="amb_forest" to="amb_forest" method="_on_finished"]

@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdnwbg4thex1q"]
+
+[ext_resource type="Script" path="res://scripts/hoverbike.gd" id="1_udc2n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t3mrh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w72tu"]
+size = Vector3(0.966797, 5.46155, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gyqwm"]
+
+[node name="hoverbike_old" type="VehicleBody3D"]
+gravity_scale = 2.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, 0.7)
+script = ExtResource("1_udc2n")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.129758)
+mesh = SubResource("BoxMesh_t3mrh")
+
+[node name="col" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, -1.24655e-08, -0.418274)
+shape = SubResource("BoxShape3D_w72tu")
+
+[node name="wheel_fl" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.253, 2.3579)
+use_as_steering = true
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.0
+suspension_stiffness = 80.0
+
+[node name="mesh" type="MeshInstance3D" parent="wheel_fl"]
+transform = Transform3D(-4.37114e-08, 0.0795688, 0, -1, -3.47806e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gyqwm")
+
+[node name="wheel_fr" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.253, 2.3579)
+use_as_steering = true
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.0
+suspension_stiffness = 80.0
+
+[node name="mesh" type="MeshInstance3D" parent="wheel_fr"]
+transform = Transform3D(-4.37114e-08, 0.0795688, 0, -1, -3.47806e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gyqwm")
+skeleton = NodePath("../../wheel_fl")
+
+[node name="wheel_rl" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.253, -3.12627)
+use_as_traction = true
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 30.0
+suspension_stiffness = 80.0
+
+[node name="mesh" type="MeshInstance3D" parent="wheel_rl"]
+transform = Transform3D(-4.37114e-08, 0.0795688, 0, -1, -3.47806e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gyqwm")
+skeleton = NodePath("../../wheel_fl")
+
+[node name="wheel_rr" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.253, -3.12627)
+use_as_traction = true
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 30.0
+suspension_stiffness = 80.0
+
+[node name="mesh" type="MeshInstance3D" parent="wheel_rr"]
+transform = Transform3D(-4.37114e-08, 0.0795688, 0, -1, -3.47806e-09, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gyqwm")
+skeleton = NodePath("../../wheel_fl")
+
+[node name="cam_pivot" type="Node3D" parent="."]
+top_level = true
+
+[node name="cam" type="Camera3D" parent="cam_pivot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00522518, 1.26052, -4.42002)
+far = 40000.0
+
+[node name="rev_cam" type="Camera3D" parent="cam_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.261, 4.42)
+far = 40000.0
+
+[node name="grounded" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.4, 0)

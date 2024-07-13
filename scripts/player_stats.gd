@@ -12,6 +12,8 @@ var can_sprint: bool = true
 var mana: float = 75.0
 var MAX_MANA: int = 75
 
+var is_mounted: bool = false
+
 func _process(delta):
 	if Input.is_action_pressed("mov_sprint") and can_sprint:
 		stamina -= STAMINA_DRAIN * delta

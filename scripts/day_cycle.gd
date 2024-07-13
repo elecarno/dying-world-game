@@ -1,16 +1,16 @@
 extends Node3D
 
-var time : float = 0.0
-var full_day_seconds = 86400 # 24 * 3600
+var time: float = 0.0
+var full_day_seconds: int = 86400 # 24 * 3600
 
-var day_color : Color = Color(0.5176, 0.5529, 0.6078, 1)
-var night_color : Color = Color(0.0392, 0.0471, 0.0588, 1)
+var day_color: Color = Color(0.5176, 0.5529, 0.6078, 1)
+var night_color: Color = Color(0.0392, 0.0471, 0.0588, 1)
 
-@export var timescale : float = 72
+@export var timescale: float = 72
 
-@onready var sun : DirectionalLight3D = get_node("sun")
-@onready var moon : DirectionalLight3D = get_node("moon")
-@onready var env : WorldEnvironment = get_node("env")
+@onready var sun: DirectionalLight3D = get_node("sun")
+@onready var moon: DirectionalLight3D = get_node("moon")
+@onready var env: WorldEnvironment = get_node("env")
 
 func get_interpolation_factor(time_of_day: float) -> float:
 	return clamp(time_of_day / full_day_seconds, 0, 1)

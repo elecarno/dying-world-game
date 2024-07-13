@@ -29,6 +29,7 @@ var gravity = 19.6
 @onready var sprint_cooldown_timer: Timer = get_node("sprint_cooldown")
 @onready var col: CollisionShape3D = get_node("col")
 @onready var sfx: player_sfx = get_node("head/sfx")
+@onready var interaction: RayCast3D = get_node("head/cam/interaction")
 
 func _ready():
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -41,6 +42,9 @@ func _unhandled_input(event):
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-70), deg_to_rad(70))
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("interact"):
+		print(interaction.get_collider())
+	
 	if Input.is_action_just_pressed("esc"):
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -75,13 +79,13 @@ func _physics_process(delta):
 		coyote_timer.start()
 
 	# handle jump.
-	if Input.is_action_just_pressed("mov_jump") and is_on_floor() and player_stats.stamina >= (player_stats.STAMINA_DRAIN * 1.5):
+	if Input.is_action_just_pressed("mov_jump") and is_on_floor() and player_stats.stamina >= (player_stats.STAMINA_DRAIN * 1.5) and !player_stats.is_mounted:
 		velocity.y = JUMP_VELOCITY
 		player_stats.stamina -= player_stats.STAMINA_DRAIN * 1.5
 		sfx.play_sfx(2)
 		
 	# handle crouch
-	if Input.is_action_pressed("mov_crouch"):
+	if Input.is_action_pressed("mov_crouch") and !player_stats.is_mounted:
 		col.shape.height = lerp(col.shape.height, 0.5, delta * 4.0)
 		crouched = true
 	else:
@@ -101,7 +105,7 @@ func _physics_process(delta):
 		sprint_cooldown_timer.start()
 
 	# movement
-	if is_on_floor():
+	if is_on_floor() and !player_stats.is_mounted:
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -117,7 +121,7 @@ func _physics_process(delta):
 	cam.transform.origin = _headbob(t_bob)
 	
 	# sfx
-	if direction:
+	if direction and !player_stats.is_mounted:
 		if cos(t_bob * BOB_FREQ / 2) > 0.9 and !sfx.sfx_footstep_1.playing:
 			if speed == SPRINT_SPEED:
 				sfx.play_sfx(0, "sprint")
