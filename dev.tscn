@@ -74,7 +74,7 @@ sky_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4861.42, 309.483, 4438.04)
 
 [node name="hoverbike" parent="." instance=ExtResource("4_6e4ac")]
-transform = Transform3D(0.383248, 0, 0.923646, 0, 1, 0, -0.923646, 0, 0.383248, -4853.1, 309.213, 4434.68)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4852.96, 307.251, 4435.3)
 
 [node name="amb_night" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("14_kd2dl")

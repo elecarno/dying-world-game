@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 # main
 var speed: float
-const WALK_SPEED: float = 15.0 # def 6
-const SPRINT_SPEED: float = 30.0 # def 12
+const WALK_SPEED: float = 6.0 # def 6
+const SPRINT_SPEED: float = 12.0 # def 12
 const CROUCH_SPEED: float = 0.5
-const JUMP_VELOCITY: float = 20.0 # def 10
+const JUMP_VELOCITY: float = 10.0 # def 10
 const SENSITIVITY: float = 0.0025
 var grounded: bool = false
 var crouched: bool = false
@@ -19,8 +19,6 @@ var t_bob: float = 0.0
 const BASE_FOV: float = 75.0
 const FOV_CHANGE: float = 1.2
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-#var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = 19.6
 
 @onready var head: Node3D = get_node("head")
@@ -30,19 +28,28 @@ var gravity = 19.6
 @onready var col: CollisionShape3D = get_node("col")
 @onready var sfx: player_sfx = get_node("head/sfx")
 @onready var interaction: RayCast3D = get_node("head/cam/interaction")
+@onready var hoverbike: CharacterBody3D = get_node("../hoverbike")
 
 func _ready():
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_node("mesh").visible = false
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and !player_stats.is_mounted:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		cam.rotate_x(-event.relative.y * SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-70), deg_to_rad(70))
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("vehicle"):
+		if player_stats.is_mounted:
+			cam.current = true
+			axis_lock_linear_x = false
+			axis_lock_linear_z = false
+			global_position = hoverbike.global_position
+		else:
+			axis_lock_linear_x = true
+			axis_lock_linear_z = true
+			
 		print(interaction.get_collider())
 	
 	if Input.is_action_just_pressed("esc"):

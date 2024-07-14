@@ -2,28 +2,31 @@
 
 [ext_resource type="Script" path="res://scripts/bike_controller.gd" id="1_2e0md"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_t3mrh"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_34nbd"]
+height = 1.8
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_w72tu"]
-size = Vector3(0.966797, 4.78436, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_iwkr5"]
 
 [node name="hoverbike" type="CharacterBody3D"]
+collision_layer = 4
+axis_lock_linear_x = true
+axis_lock_linear_z = true
 script = ExtResource("1_2e0md")
 
-[node name="mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.129758)
-mesh = SubResource("BoxMesh_t3mrh")
-
 [node name="col" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, -2.37469e-09, -0.0796814)
-shape = SubResource("BoxShape3D_w72tu")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_34nbd")
 
-[node name="cam_pivot" type="Node3D" parent="."]
-top_level = true
+[node name="pivot" type="Node3D" parent="."]
 
-[node name="cam" type="Camera3D" parent="cam_pivot"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00522518, 1.26052, -4.42002)
+[node name="mesh" type="MeshInstance3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.73194, 0, 0.606526, 0)
+mesh = SubResource("BoxMesh_iwkr5")
+skeleton = NodePath("../../head")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="cam" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.278, 3.525)
 far = 40000.0
-
-[node name="grounded" type="RayCast3D" parent="."]
-target_position = Vector3(0, -1.4, 0)
