@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dwl2yxa1jrbeb"]
 
-[ext_resource type="Shader" path="res://sky.gdshader" id="1_ih7dq"]
+[ext_resource type="Shader" path="res://env/mats/sky.gdshader" id="1_ih7dq"]
 [ext_resource type="Texture2D" uid="uid://db4fbrnnxnmwi" path="res://env/tex/stars.png" id="2_8wsgf"]
 
 [resource]

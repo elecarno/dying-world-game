@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://nxw1cppink00"]
 
-[ext_resource type="Material" uid="uid://btqr6tgwjxj2j" path="res://env/prefabs/water.tres" id="1_susse"]
+[ext_resource type="Material" uid="uid://btqr6tgwjxj2j" path="res://env/mats/water.tres" id="1_susse"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_w7f4d"]
 size = Vector2(25000, 25000)
