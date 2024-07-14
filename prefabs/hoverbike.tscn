@@ -24,6 +24,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.73194, 0, 0.606526, 0)
 mesh = SubResource("BoxMesh_iwkr5")
 skeleton = NodePath("../../head")
 
+[node name="pointer" type="MeshInstance3D" parent="pivot"]
+transform = Transform3D(0.467098, 0, 0, 0, 0.467098, 0, 0, 0, 1.3633, 0.0047946, 0.968093, -0.708441)
+mesh = SubResource("BoxMesh_iwkr5")
+skeleton = NodePath("../../head")
+
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b8ms5ocx38qfl"]
+
+[ext_resource type="Texture2D" uid="uid://xkygnjbt27sd" path="res://env/tex/road_1.png" id="1_qp6lu"]
+
+[resource]
+albedo_texture = ExtResource("1_qp6lu")
+emission_operator = 1
+texture_filter = 0

@@ -3,15 +3,16 @@ extends CharacterBody3D
 @onready var cam: Camera3D = get_node("head/cam")
 @onready var head: Node3D = get_node("head")
 @onready var pivot: Node3D = get_node("pivot")
+@onready var player: CharacterBody3D = get_node("../player")
 
 var speed: float
-const BASE_SPEED: float = 75.0
-const BOOST_SPEED: float = 120.0
+const BASE_SPEED: float = 45.0
+const BOOST_SPEED: float = 75.0
 const JUMP_VELOCITY: float = 20.0
 const SENSITIVITY: float = 0.001
 
 const BASE_FOV: float = 75.0
-const FOV_CHANGE: float = 0.35
+const FOV_CHANGE: float = 0.5
 
 var gravity = 19.6
 
@@ -30,6 +31,7 @@ func _physics_process(delta):
 			cam.current = true
 			axis_lock_linear_x = false
 			axis_lock_linear_z = false
+			global_position = player.global_position
 			visible = true
 		else:
 			axis_lock_linear_x = true
