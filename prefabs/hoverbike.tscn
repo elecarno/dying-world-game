@@ -9,6 +9,7 @@ height = 1.8
 
 [node name="hoverbike" type="CharacterBody3D"]
 collision_layer = 4
+collision_mask = 9
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 script = ExtResource("1_2e0md")

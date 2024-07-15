@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dtotj42xmc77w"]
+[gd_scene load_steps=34 format=3 uid="uid://dtotj42xmc77w"]
 
 [ext_resource type="Material" uid="uid://dwl2yxa1jrbeb" path="res://sky.tres" id="1_0chrf"]
 [ext_resource type="Script" path="res://scripts/day_cycle.gd" id="1_1dg4y"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bdc2gmb8foh3g" path="res://sound/ambience/Ambiance_Night_Loop_Stereo.wav" id="14_kd2dl"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="14_s2op0"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="15_qtbma"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="16_es0f7"]
 [ext_resource type="PackedScene" uid="uid://nxw1cppink00" path="res://env/prefabs/water_plane.tscn" id="22_5ai8v"]
 [ext_resource type="PackedScene" uid="uid://d1cpfkd18veq8" path="res://env/map_main.tscn" id="22_pcqb1"]
 [ext_resource type="PackedScene" uid="uid://cdcf8vxqjasss" path="res://env/prefabs/temple_1.tscn" id="24_a5nj0"]
@@ -43,16 +44,19 @@ size = Vector2(100, 100)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lr83v"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
 
-[sub_resource type="Resource" id="Resource_liduu"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_p77tt"]
+size = Vector3(151.641, 25.0979, 105.888)
+
+[sub_resource type="Resource" id="Resource_qorct"]
 script = ExtResource("12_pgdq4")
-amount = 1000
+amount = 4000
 enabled = true
 override_global_seed = false
 custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_ryb4y"]
+[sub_resource type="Resource" id="Resource_khj7x"]
 script = ExtResource("13_cfgj7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 360, 0)
@@ -63,7 +67,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_icmi0"]
+[sub_resource type="Resource" id="Resource_twitp"]
 script = ExtResource("14_s2op0")
 iterations = 3
 offset_step = 0.2
@@ -75,25 +79,38 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_i88jb"]
+[sub_resource type="Resource" id="Resource_x4ytp"]
 script = ExtResource("15_qtbma")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 50.0
 ray_offset = 5.0
-remove_points_on_miss = false
+remove_points_on_miss = true
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
-exclude_mask = 0
+exclude_mask = 24
 enabled = true
 override_global_seed = false
 custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_fkgc4"]
+[sub_resource type="Resource" id="Resource_py77b"]
 script = ExtResource("11_osea3")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_liduu"), SubResource("Resource_ryb4y"), SubResource("Resource_icmi0"), SubResource("Resource_i88jb")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_qorct"), SubResource("Resource_khj7x"), SubResource("Resource_twitp"), SubResource("Resource_x4ytp")])
+
+[sub_resource type="Curve3D" id="Curve3D_goitn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 288.529, 0, -349.256, 0, 0, 0, 0, 0, 0, 196.979, 0, -361.662, 0, 0, 0, 0, 0, 0, 102.825, 0, -431.39, 0, 0, 0, 0, 0, 0, 54.5474, 0, -359.935, 0, 0, 0, 0, 0, 0, -4.23584, 0, -392.219, 0, 0, 0, 0, 0, 0, -58.2739, 0, -319.607, 0, 0, 0, 0, 0, 0, -142.337, 0, -379.511, 0, 0, 0, 0, 0, 0, -243.061, 0, -398.347, 0, 0, 0, 0, 0, 0, -347.632, 3.05176e-05, -339.356, 0, 0, 0, 0, 0, 0, -534.435, 0, -260.023, 0, 0, 0, 0, 0, 0, -743.485, 3.05176e-05, -123.733, 0, 0, 0, 0, 0, 0, -726.68, -3.05176e-05, 3.90076, 0, 0, 0, 0, 0, 0, -543.957, -3.05176e-05, 39.9835, 0, 0, 0, 0, 0, 0, -379.443, -3.05176e-05, 159.389, 0, 0, 0, 0, 0, 0, -264.903, -3.05176e-05, 249.748, 0, 0, 0, 0, 0, 0, -184.455, -3.05176e-05, 313.052, 0, 0, 0, 0, 0, 0, -104.315, -3.05176e-05, 259.911, 0, 0, 0, 0, 0, 0, -52.3853, -3.05176e-05, 241.814, 0, 0, 0, 0, 0, 0, 14.8325, -3.05176e-05, 107.692, 0, 0, 0, 0, 0, 0, 229.88, -3.05176e-05, 25.0156, 0, 0, 0, 0, 0, 0, 394.081, -3.05176e-05, -212.355, 0, 0, 0, 0, 0, 0, 372.961, 0, -282.602, 0, 0, 0, 0, 0, 0, 330.83, 0, -301.684),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 23
+
+[sub_resource type="Resource" id="Resource_8lg75"]
+script = ExtResource("16_es0f7")
+closed = true
+thickness = 0.0
+curve = SubResource("Curve3D_goitn")
 
 [sub_resource type="Gradient" id="Gradient_o8iqi"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
@@ -156,18 +173,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.8489, 0)
 [node name="map_main" parent="." instance=ExtResource("22_pcqb1")]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
 
-[node name="temple_1" parent="." instance=ExtResource("24_a5nj0")]
-transform = Transform3D(-0.359175, 0, 0.600827, 0, 0.7, 0, -0.600827, 0, -0.359175, -6553.79, 290.791, 4774.77)
-
 [node name="sectors" type="Node3D" parent="."]
 
 [node name="5" type="Node3D" parent="sectors"]
-transform = Transform3D(-0.359175, 0, 0.600827, 0, 0.7, 0, -0.600827, 0, -0.359175, -6553.79, 290.791, 4774.77)
+transform = Transform3D(-0.359175, 0, 0.600827, 0, 0.7, 0, -0.600827, 0, -0.359175, -4922.74, 290.791, 1245.32)
 
-[node name="ProtonScatter" parent="sectors/5" instance=ExtResource("10_8ssl6")]
-transform = Transform3D(-0.733011, 0, -1.22618, 0, 1.42857, 0, 1.22618, 0, -0.733011, 2849.84, 36.7497, 4562.38)
+[node name="clearing" type="StaticBody3D" parent="sectors/5"]
+transform = Transform3D(0.798246, 0, 0.60233, 0, 1, 0, -0.60233, 0, 0.798246, 13.5688, 31.0294, -315.862)
+collision_layer = 16
+
+[node name="col" type="CollisionShape3D" parent="sectors/5/clearing"]
+transform = Transform3D(1, 0, 0, 0, 0.999973, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_p77tt")
+
+[node name="tree_scatter" parent="sectors/5" instance=ExtResource("10_8ssl6")]
+transform = Transform3D(-0.733011, 0, -1.22618, 0, 1.42857, 0, 1.22618, 0, -0.733011, -216.182, 36.7497, 22.5557)
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_fkgc4")
+modifier_stack = SubResource("Resource_py77b")
+
+[node name="ScatterShape" parent="sectors/5/tree_scatter" index="3"]
+shape = SubResource("Resource_8lg75")
+
+[node name="temple_1" parent="sectors/5" instance=ExtResource("24_a5nj0")]
+transform = Transform3D(0.614559, 0, -0.788869, 0, 1, 0, 0.788869, 0, 0.614559, -22.3945, 40.3639, -288.787)
 
 [node name="ui" type="CanvasLayer" parent="."]
 
@@ -251,3 +279,5 @@ editable = false
 scrollable = false
 
 [connection signal="finished" from="amb_night" to="amb_night" method="_on_finished"]
+
+[editable path="sectors/5/tree_scatter"]

@@ -19,12 +19,12 @@ var gravity = 19.6
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and player_stats.is_mounted:
 		pivot.rotate_y(-event.relative.x * SENSITIVITY)
-		head.rotate_y(-event.relative.x * SENSITIVITY)
+		#head.rotate_y(-event.relative.x * SENSITIVITY)
 		cam.rotate_x(-event.relative.y * SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-10), deg_to_rad(25))
 
 func _physics_process(delta):
-	#head.rotation.y = lerp(head.rotation.y, pivot.rotation.y, delta * 2.0)
+	head.rotation.y = lerp(head.rotation.y, pivot.rotation.y, delta * 2.0)
 	
 	if Input.is_action_just_pressed("vehicle"):
 		player_stats.is_mounted = !player_stats.is_mounted

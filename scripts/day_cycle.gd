@@ -1,6 +1,6 @@
 extends Node3D
 
-var time: float = 0.0
+var time: float = 21600.0
 var full_day_seconds: int = 86400 # 24 * 3600
 
 var day_color: Color = Color(0.5176, 0.5529, 0.6078, 1)
