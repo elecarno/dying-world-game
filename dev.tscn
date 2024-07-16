@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dtotj42xmc77w"]
+[gd_scene load_steps=35 format=3 uid="uid://dtotj42xmc77w"]
 
 [ext_resource type="Material" uid="uid://dwl2yxa1jrbeb" path="res://sky.tres" id="1_0chrf"]
 [ext_resource type="Script" path="res://scripts/day_cycle.gd" id="1_1dg4y"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="13_cfgj7"]
 [ext_resource type="AudioStream" uid="uid://bdc2gmb8foh3g" path="res://sound/ambience/Ambiance_Night_Loop_Stereo.wav" id="14_kd2dl"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="14_s2op0"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="15_b7gpf"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="15_qtbma"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="16_es0f7"]
 [ext_resource type="PackedScene" uid="uid://nxw1cppink00" path="res://env/prefabs/water_plane.tscn" id="22_5ai8v"]
@@ -47,7 +48,7 @@ data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0,
 [sub_resource type="BoxShape3D" id="BoxShape3D_p77tt"]
 size = Vector3(151.641, 25.0979, 105.888)
 
-[sub_resource type="Resource" id="Resource_qorct"]
+[sub_resource type="Resource" id="Resource_gxcij"]
 script = ExtResource("12_pgdq4")
 amount = 4000
 enabled = true
@@ -56,7 +57,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_khj7x"]
+[sub_resource type="Resource" id="Resource_4p3gl"]
 script = ExtResource("13_cfgj7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 360, 0)
@@ -67,7 +68,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_twitp"]
+[sub_resource type="Resource" id="Resource_f5avd"]
 script = ExtResource("14_s2op0")
 iterations = 3
 offset_step = 0.2
@@ -79,7 +80,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_x4ytp"]
+[sub_resource type="Resource" id="Resource_iwv51"]
 script = ExtResource("15_qtbma")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 50.0
@@ -95,9 +96,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_py77b"]
+[sub_resource type="Resource" id="Resource_4l2cc"]
 script = ExtResource("11_osea3")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_qorct"), SubResource("Resource_khj7x"), SubResource("Resource_twitp"), SubResource("Resource_x4ytp")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_gxcij"), SubResource("Resource_4p3gl"), SubResource("Resource_f5avd"), SubResource("Resource_iwv51")])
 
 [sub_resource type="Curve3D" id="Curve3D_goitn"]
 _data = {
@@ -189,9 +190,27 @@ shape = SubResource("BoxShape3D_p77tt")
 [node name="tree_scatter" parent="sectors/5" instance=ExtResource("10_8ssl6")]
 transform = Transform3D(-0.733011, 0, -1.22618, 0, 1.42857, 0, 1.22618, 0, -0.733011, -216.182, 36.7497, 22.5557)
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_py77b")
+modifier_stack = SubResource("Resource_4l2cc")
 
-[node name="ScatterShape" parent="sectors/5/tree_scatter" index="3"]
+[node name="rock1" type="Node3D" parent="sectors/5/tree_scatter"]
+script = ExtResource("15_b7gpf")
+proportion = 30
+source_scale_multiplier = 2.5
+path = "res://env/prefabs/rock_1.tscn"
+
+[node name="rock2" type="Node3D" parent="sectors/5/tree_scatter"]
+script = ExtResource("15_b7gpf")
+proportion = 30
+source_scale_multiplier = 2.5
+path = "res://env/prefabs/rock_2.tscn"
+
+[node name="rock3" type="Node3D" parent="sectors/5/tree_scatter"]
+script = ExtResource("15_b7gpf")
+proportion = 30
+source_scale_multiplier = 2.5
+path = "res://env/prefabs/rock_3.tscn"
+
+[node name="ScatterShape" parent="sectors/5/tree_scatter" index="6"]
 shape = SubResource("Resource_8lg75")
 
 [node name="temple_1" parent="sectors/5" instance=ExtResource("24_a5nj0")]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bawc3phdkvyrs"]
+[gd_scene load_steps=5 format=3 uid="uid://bawc3phdkvyrs"]
 
 [ext_resource type="PackedScene" uid="uid://mwv2ibc1jbl7" path="res://env/models/tree_3.glb" id="1_ly0g2"]
-[ext_resource type="Script" path="res://scripts/random_size.gd" id="2_gxvgi"]
 [ext_resource type="Material" uid="uid://2qmq1p5vry3d" path="res://env/mats/trunk.tres" id="2_rs1is"]
 [ext_resource type="Material" uid="uid://dhdcqb5ry5o4e" path="res://env/mats/leaves.tres" id="3_ih5g3"]
 
@@ -10,10 +9,6 @@ data = PackedVector3Array(-0.8911, 2.4941, 0.1408, -1.1912, 2.7897, 0.1408, -0.8
 
 [node name="tree_3" instance=ExtResource("1_ly0g2")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("2_gxvgi")
-min_scale = 1.8
-max_scale = 2.5
-randomise_rotation = true
 
 [node name="tree_3" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
